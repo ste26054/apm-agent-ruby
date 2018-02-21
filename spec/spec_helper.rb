@@ -6,11 +6,12 @@ ENV['ELASTIC_APM_ENABLED_ENVIRONMENTS'] = 'test'
 require 'bundler/setup'
 Bundler.require :default, 'test'
 
+require 'webmock/rspec'
+
 require 'support/delegate_matcher'
 require 'support/match_json_schema_matcher'
 require 'support/mock_time'
 require 'support/with_fake_server'
-require 'webmock/rspec'
 
 require 'elastic-apm'
 
