@@ -4,8 +4,6 @@ require 'json'
 require 'timeout'
 
 class FakeServer
-  LOCK = Mutex.new
-
   class << self
     def requests
       @requests ||= []
@@ -26,9 +24,16 @@ end
 
 RSpec.configure do |config|
   config.before :each, :with_fake_server do
+    puts "\n"
+    puts 'stuuuuuub' + ('v' * 80)
     @request_stub =
       WebMock.stub_request(:any, /.*/).to_rack(FakeServer)
     FakeServer.clear!
+  end
+
+  config.after :each, :with_fake_server do
+    puts 'after'
+    pp @request_stub.inspect
   end
 
   # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
