@@ -35,7 +35,7 @@ module ElasticAPM
       it { should delegate :set_user, to: subject.instrumenter }
     end
 
-    context 'reporting' do
+    context 'reporting', :with_fake_server do
       class AgentTestError < StandardError; end
 
       subject { Agent.new Config.new }
@@ -76,7 +76,7 @@ module ElasticAPM
       end
     end
 
-    describe '#enqueue_transactions' do
+    describe '#enqueue_transactions', :with_fake_server do
       subject { Agent.new Config.new }
 
       it 'enqueues a collection of transactions' do
